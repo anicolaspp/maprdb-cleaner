@@ -16,11 +16,4 @@ libraryDependencies ++= Seq(
   "com.github.scopt" % "scopt_2.11" % "3.7.0"
 )
 
-//assemblyMergeStrategy in assembly := {
-//  case PathList("org", "apache", "spark", "unused", xs@_*) => MergeStrategy.last
-//  case x =>
-//    val oldStrategy = (assemblyMergeStrategy in assembly).value
-//    oldStrategy(x)
-//}
-
-assemblyJarName := s"${name.value}-${version.value}.jar"
+assemblyJarName := s"maprdbcls-${version.value}.jar"
