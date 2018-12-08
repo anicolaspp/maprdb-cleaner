@@ -10,8 +10,6 @@ object App {
       .parse(args)
       .foreach { config =>
 
-        println(config)
-
         implicit val connection: Connection = getConnection()
 
         val query = buildQuery(config)
