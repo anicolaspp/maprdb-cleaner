@@ -16,6 +16,6 @@ object App {
       .map(Db.run)
       .foreach {
         case Left(error) => println(error)
-        case Right(msg) => println(msg)
+        case Right(msg)  => println(msg)
       }
 }
