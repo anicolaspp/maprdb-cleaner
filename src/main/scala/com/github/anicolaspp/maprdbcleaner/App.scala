@@ -1,7 +1,7 @@
 package com.github.anicolaspp.maprdbcleaner
 
 import com.github.anicolaspp.maprdbcleaner.conf.Configuration
-import org.ojai.store.{Connection, DriverManager}
+import org.ojai.store.{Connection, DocumentStore, DriverManager}
 
 object App {
 
@@ -9,25 +9,26 @@ object App {
     Configuration
       .parse(args)
       .foreach { config =>
-        println("hello")
 
-//        implicit val connection = getConnection
-        //
-        //        val query = buildQuery(config)
-        //
-        //        val documentStore: DocumentStore = connection.getStore(config.tableName)
-        //
-        //        val documents = documentStore.find(query)
-        //
-        //        documentStore.delete(documents, config.id)
-        //
-        //        documentStore.close()
+        println(config)
 
-        println("done")
+        implicit val connection: Connection = getConnection()
+
+        val query = buildQuery(config)
+
+        val documentStore: DocumentStore = connection.getStore(config.tableName)
+
+        val documents = documentStore.find(query)
+
+        documentStore.delete(documents, config.id)
+
+        documentStore.close()
+
+        println(s"Done deleting documents for query: ${query}")
       }
   }
 
-  def getConnection = DriverManager.getConnection("ojai:mapr:")
+  private def getConnection() = DriverManager.getConnection("ojai:mapr:")
 
   private def buildQuery(conf: Configuration)(implicit connection: Connection) =
     if (conf.allDocuments) allDocumentsQuery() else someDocumentsQuery(conf.query)
