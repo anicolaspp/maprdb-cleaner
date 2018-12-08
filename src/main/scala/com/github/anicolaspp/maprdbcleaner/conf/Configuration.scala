@@ -8,7 +8,7 @@ object Configuration {
 
   private def default = Configuration("", allDocuments = false, query = "", id  = "_id")
 
-  private lazy val parser = new scopt.OptionParser[Configuration]("run.sh") {
+  private lazy val parser = new scopt.OptionParser[Configuration]("maprdbcls.sh") {
     head("maprdb-cleaner")
 
     opt[String]('t', "tableName")
