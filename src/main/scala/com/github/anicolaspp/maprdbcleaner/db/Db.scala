@@ -20,6 +20,8 @@ object Db {
 
     val documents = documentStore.find(query)
 
+    println(s"Notice that the deletion process might take a while based on the size of the table ${config.tableName}.")
+
     documentStore.delete(documents, config.id)
 
     documentStore.close()
@@ -36,5 +38,5 @@ case class Error(e: Throwable) extends DBError
 sealed trait DBMessage
 
 case class CompletionMessage(query: Query) extends DBMessage {
-  override def toString: String = s"Done deleting documents for query: $query"
+  override def toString: String = s"Done deleting documents for query: $query."
 }
