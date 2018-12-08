@@ -8,7 +8,7 @@ object Configuration {
 
   private def default = Configuration("", allDocuments = false, query = "", id  = "_id")
 
-  private lazy val parser = new scopt.OptionParser[Configuration]("maprdb-cleaner") {
+  private lazy val parser = new scopt.OptionParser[Configuration]("run.sh") {
     head("maprdb-cleaner")
 
     opt[String]('t', "tableName")
@@ -25,16 +25,23 @@ object Configuration {
       .action((all, conf) => conf.copy(allDocuments = all))
       .required()
       .maxOccurs(1)
-      .text("Indicates if all documents should be deleted. If false, only those on the query argument will be deleted")
+      .text("Indicates if all documents should be deleted. If false, only those on the query argument will be deleted.")
 
     opt[String]('q', "query")
       .action((query, conf) => conf.copy(query = query))
       .maxOccurs(1)
-      .text("OJAI query to be deleted from MapR-DB. This query will ONLY be executed if --all is false")
+      .text("OJAI query to be deleted from MapR-DB. This query will ONLY be executed if --all is false.")
 
     opt[String]('i', "id")
       .action((id, conf) => conf.copy(id = id))
       .maxOccurs(1)
-      .text("Name of the field used as the id on the table. If not provided, _id will be used")
+      .text("Name of the field used as the id on the table. If not provided, _id will be used.")
+
+      checkConfig { config =>
+        if (!config.allDocuments && config.query.isEmpty)
+          Left("When indicating --all false, a query (-q OR --query) must be provided.")
+        else
+          Right()
+      }
   }
 }
