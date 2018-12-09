@@ -6,7 +6,7 @@ class MaprdbCleaner < Formula
   depends_on :java => "1.8+"
 
   def install
-    bin.install "maprdbcls.sh"
+    bin.install "maprdbcls"
     bin.install "maprdbcls-1.0.0.jar"
   end
 end
