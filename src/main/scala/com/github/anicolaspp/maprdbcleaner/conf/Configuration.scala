@@ -23,9 +23,8 @@ object Configuration {
 
     opt[Boolean]('a', "all")
       .action((all, conf) => conf.copy(allDocuments = all))
-      .required()
       .maxOccurs(1)
-      .text("Indicates if all documents should be deleted. If false, only those on the query argument will be deleted.")
+      .text("Indicates if all documents should be deleted. If false, only those on the --query argument will be deleted.")
 
     opt[String]('q', "query")
       .action((query, conf) => conf.copy(query = query))
@@ -39,7 +38,7 @@ object Configuration {
 
       checkConfig { config =>
         if (!config.allDocuments && config.query.isEmpty)
-          Left("When indicating --all false, a query (-q OR --query) must be provided.")
+          Left("When omitting --all OR indicating --all false, a query (-q OR --query) must be provided.")
         else
           Right()
       }
