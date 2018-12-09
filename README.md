@@ -31,10 +31,10 @@ maprdbcls -t /user/mapr/tables/rnd --all true
 maprdbcls -t /user/mapr/tables/rnd --all true --id custom_id_field 
 ```
 
-- Delete first 10 users where `age` is less than `10`.
+- Delete first 20 users which `age` is less than `10`.
 
 ```bash
-maprdbcls -t /user/mapr/tables/users -all false --query '{"$where": {"$lt": {"age": 10}}, "$limit": 10}'
+maprdbcls -t /user/mapr/tables/users -all false --query '{"$where": {"$lt": {"age": 10}}, "$limit": 20}'
 ```
  
 `maprdbcls` executes `maprdbcls-1.0.0.jar` passsing the class path `/opt/mapr/lib/*`, so `MapR` client should 
