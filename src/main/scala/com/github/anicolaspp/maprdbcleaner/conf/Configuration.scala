@@ -8,8 +8,8 @@ object Configuration {
 
   private def default = Configuration("", allDocuments = false, query = "", id  = "_id")
 
-  private lazy val parser = new scopt.OptionParser[Configuration]("maprdbcls.sh") {
-    head("maprdb-cleaner")
+  private lazy val parser = new scopt.OptionParser[Configuration]("maprdbcls") {
+    head("maprdbcls")
 
     opt[String]('t', "tableName")
       .action((table, conf) => conf.copy(tableName = table))
