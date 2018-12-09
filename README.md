@@ -2,26 +2,33 @@
 A small tool to clean MapR-DB based on queries
 
 
+Installation
+
+```bash
+brew install https://raw.githubusercontent.com/anicolaspp/maprdb-cleaner/master/maprdb-cleaner.rb
+```
+
+
 Using this tool, we should be able to run the fallowing commands:
 
  
 Deletes document with `_id` equals to `-1016518206699135554`
 ```bash
-./maprdbcls.sh -t /user/mapr/tables/rnd --all false -q '{"$where": {"$eq": {"_id": "-1016518206699135554"}}}'
+maprdbcls -t /user/mapr/tables/rnd --all false -q '{"$where": {"$eq": {"_id": "-1016518206699135554"}}}'
 
 ```
 
 Deletes all documents
 
 ```bash
-./maprdbcls.sh -t /user/mapr/tables/rnd --all true
+maprdbcls -t /user/mapr/tables/rnd --all true
 
 ```
 
 Deletes all documents using id `custom_id_field`
 
 ```bash
-./maprdbcls.sh -t /user/mapr/tables/rnd --all true --id custom_id_field 
+maprdbcls -t /user/mapr/tables/rnd --all true --id custom_id_field 
 
 ```
  
