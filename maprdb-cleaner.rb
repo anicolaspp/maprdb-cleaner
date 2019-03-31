@@ -2,7 +2,7 @@ class MaprdbCleaner < Formula
   desc "A small tool to clean MapR-DB based on queries"
   homepage "https://github.com/anicolaspp/maprdb-cleaner"
   url "https://github.com/anicolaspp/maprdb-cleaner/releases/download/1.0.1/maprdbcls.tar"
-  sha256 "fc778d7b3ddb756af7d485c5e59dc4d62e129f57c98188f705dd1050eb880824"
+  sha256 "44590a86c787034e45b406d96f938e4cda827c62ddd08d0696db473e0e89ad2b"
   depends_on :java => "1.8+"
 
   def install
