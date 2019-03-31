@@ -16,25 +16,25 @@ brew install https://raw.githubusercontent.com/anicolaspp/maprdb-cleaner/master/
 - Deletes document with `_id` equals to `-1016518206699135554`.
 
 ```bash
-maprdbcls -t /user/mapr/tables/rnd --all false -q '{"$where": {"$eq": {"_id": "-1016518206699135554"}}}'
+maprdbcls -t /user/mapr/tables/rnd -q '{"$where": {"$eq": {"_id": "-1016518206699135554"}}}'
 ```
 
 - Deletes all documents.
 
 ```bash
-maprdbcls -t /user/mapr/tables/rnd --all true
+maprdbcls -t /user/mapr/tables/rnd --all
 ```
 
 - Deletes all documents using id `custom_id_field`.
 
 ```bash
-maprdbcls -t /user/mapr/tables/rnd --all true --id custom_id_field 
+maprdbcls -t /user/mapr/tables/rnd --all --id custom_id_field 
 ```
 
 - Delete first 20 users which `age` is less than `10`.
 
 ```bash
-maprdbcls -t /user/mapr/tables/users -all false --query '{"$where": {"$lt": {"age": 10}}, "$limit": 20}'
+maprdbcls -t /user/mapr/tables/users --query '{"$where": {"$lt": {"age": 10}}, "$limit": 20}'
 ```
  
 `maprdbcls` executes `maprdbcls-1.0.0.jar` passsing the class path `/opt/mapr/lib/*`, so `MapR` client should 
