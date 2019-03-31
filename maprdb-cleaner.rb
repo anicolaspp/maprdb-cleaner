@@ -7,6 +7,6 @@ class MaprdbCleaner < Formula
 
   def install
     bin.install "maprdbcls"
-    bin.install "maprdbcls-1.0.0.jar"
+    bin.install "maprdbcls-1.0.1.jar"
   end
 end
