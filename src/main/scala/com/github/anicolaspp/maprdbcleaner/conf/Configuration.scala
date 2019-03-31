@@ -29,7 +29,7 @@ object Configuration {
     opt[String]('q', "query")
       .action((query, conf) => conf.copy(query = query))
       .maxOccurs(1)
-      .text("OJAI query to be deleted from MapR-DB. This query will ONLY be executed if --all is false.")
+      .text("OJAI query to be deleted from MapR-DB. This query will ONLY be executed if --all is missing.")
 
     opt[String]('i', "id")
       .action((id, conf) => conf.copy(id = id))
