@@ -1,5 +1,7 @@
 package com.github.anicolaspp.maprdbcleaner.db
 
+import java.util.stream.StreamSupport
+
 import com.github.anicolaspp.maprdbcleaner.conf.Configuration
 import org.ojai.store.{Connection, DocumentStore, Query}
 
@@ -22,7 +24,9 @@ object Db {
 
     println(s"Notice that the deletion process might take a while based on the size of the table ${config.tableName}.")
 
-    documentStore.delete(documents, config.id)
+    import scala.collection.JavaConverters._
+
+    documents.asScala.par.foreach(document => documentStore.delete(document, config.id))
 
     documentStore.close()
 

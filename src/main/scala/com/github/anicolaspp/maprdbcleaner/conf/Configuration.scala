@@ -1,12 +1,12 @@
 package com.github.anicolaspp.maprdbcleaner.conf
 
-case class Configuration(tableName: String, allDocuments: Boolean, query: String, id: String)
+case class Configuration(tableName: String, allDocuments: Boolean, query: String, id: String, isSQL: Boolean = false)
 
 object Configuration {
-  
+
   def parse(args: Seq[String]): Option[Configuration] = parser.parse(args, default)
 
-  private def default = Configuration("", allDocuments = false, query = "", id  = "_id")
+  private def default = Configuration("", allDocuments = false, query = "", id = "_id")
 
   private lazy val parser = new scopt.OptionParser[Configuration]("maprdbcls") {
     head("maprdbcls")
@@ -17,8 +17,8 @@ object Configuration {
       .maxOccurs(1)
       .text("MapR-DB table name to be used")
       .validate {
-        case "" =>  Left("This value cannot be empty")
-        case _  =>  Right()
+        case "" => Left("This value cannot be empty")
+        case _ => Right()
       }
 
     opt[Unit]("all")
@@ -36,11 +36,14 @@ object Configuration {
       .maxOccurs(1)
       .text("Name of the field used as the id on the table. If not provided, _id will be used.")
 
-      checkConfig { config =>
-        if (!config.allDocuments && config.query.isEmpty)
-          Left("When omitting --all, a query (-q OR --query) must be provided.")
-        else
-          Right()
-      }
+    opt[String]('s', "sql")
+        .action((query, conf) => conf.copy(query))
+
+    checkConfig { config =>
+      if (!config.allDocuments && config.query.isEmpty)
+        Left("When omitting --all, a query (-q OR --query) must be provided.")
+      else
+        Right()
+    }
   }
 }

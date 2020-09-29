@@ -6,7 +6,14 @@ import org.ojai.store.{Connection, Query}
 object QueryBuilder {
 
   def buildFrom(config: Configuration)(implicit connection: Connection): (Query, Configuration) =
-    (if (config.allDocuments) allDocumentsQuery() else someDocumentsQuery(config.query), config)
+    (if (config.allDocuments) allDocumentsQuery() else {
+      if (!config.isSQL) {
+        someDocumentsQuery(config.query)
+      } else  {
+        // call dojai parser to get OJAI query
+        someDocumentsQuery(config.query)
+      }
+    }, config)
 
   private def allDocumentsQuery()(implicit connection: Connection) = connection.newQuery().build()
 

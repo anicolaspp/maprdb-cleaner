@@ -17,6 +17,8 @@ libraryDependencies ++= Seq(
   "commons-logging" % "commons-logging" % "1.2" % "provided",
   "xerces" % "xercesImpl" % "2.11.0" % "provided",
   "com.github.scopt" % "scopt_2.11" % "3.7.0"
-)
+)  .map(_.exclude("org.slf4j", "slf4j-log4j12"))
+
+libraryDependencies += "com.github.anicolaspp" % "dojai" % "1.0.0"
 
 assemblyJarName := s"maprdbcls-${version.value}.jar"
